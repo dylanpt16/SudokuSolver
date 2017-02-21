@@ -1,0 +1,38 @@
+	public static int findEmpty(char grid[][], Place places[])
+	{
+		int k = 0;
+		for(int i = 0; i < 9; i++)
+		{
+			for(int j = 0; j < 9; j++)
+			{
+				if(grid[i][j] == '0')
+				{
+					places[k].setPlace(i, j);
+					k++;
+				}
+			}
+		}
+		return k;
+	}
+    public static boolean Solve(char grid[][], Place places[], int tries, int index)
+    {
+    	char a;
+    	if(tries == index)
+    	{
+    		return true;
+    	}
+    	for(a = '1'; a <= '9'; a++)
+    	{
+    	      if( isValid( grid, a, places[tries].getRow(), places[tries].getCol() ) )
+    	      {
+    	         grid[places[tries].getRow()][places[tries].getCol()] = a;
+    	         if( Solve( grid, places, tries+1, index ) == true )
+    	         {
+    	            return true;
+    	         }
+    	         grid[places[tries].getRow()][places[tries].getCol()] = ' ';
+    	      }
+
+    	}
+    	return false;
+    }
